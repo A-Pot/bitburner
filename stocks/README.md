@@ -41,4 +41,3 @@ To watch all stocks, the script `stock_hold_all.js` allocates a thread to each o
 | `stock_hold_all.js` | The primary stock script which needs to be invoked directly. It calls `stock_hold_one.js` on each of the 33 stock listings in the game. |
 | `stock_hold_one.js` | Given a ticker symbol as an argument, it executes the buy/hold/sell strategy described above for that company. |
 | `stock_stop.js` | This terminates all stock programs; it does not sell currently held stock prior to terminating, so the player will be left holding any purchased stock. |
-| `stock_single_best.js` | This is an alternative strategy that can be used early on when resources are scarse and investing in all stocks simultaneously is prohibitive. This script finds the ticker with the highest probability of increasing and only targets that one stock for buy/hold/sell activity. |
