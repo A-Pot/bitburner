@@ -22,7 +22,7 @@ As money and hacking skill initially accumulate, acquire the TOR, and [use it](h
 ## Hacking Mechanics
 
 Servers have a few important properties:
-- A **name** that uniquely idenfies the server
+- A **name** that uniquely identifies the server
 - A server **hacking level**, which means that it cannot be hacked by the player unless the player's own hacking level meets or exceeds the server hacking level.
 - **Port Threshold**, which means that unless the player opens at least this number of ports on the server, it cannot be hacked.
 - A **security level**, which dictates the probability that a hack attempt will be successful.
@@ -54,7 +54,7 @@ As you can see, the first grow raised the money on the server by about 1,274%, t
 
 ### Target Discovery
 
-The hacking routine starts by discovering which servers can be hacked by comparing the player's hacking level to the server's hacking level and by comparing the number of port-opening scripts owned by the player relative to the server's port threshold. The script `open_target.js` is attempted on each server, which performs these checks. It attempts to nuke the server to
+The hacking routine starts by discovering which servers can be hacked by comparing the player's hacking level to the server's hacking level and by comparing the number of port-opening scripts owned by the player relative to the server's port threshold. The script `open_target.js` is attempted on each server, which performs these checks. It attempts to open as many ports as possible and nuke the target server in preparation for hacking.
 
 ### Load Balancing Across Servers
 
@@ -66,7 +66,7 @@ As an example, the server `silver-helix` has a hacking level of 150, the server 
 
 ### Load Balancing Within Servers
 
-RAM allows the player to amplify the effects of a script by assigning it mulitple [threads](https://bitburner.readthedocs.io/en/latest/basicgameplay/scripts.html?highlight=threads#multithreading-scripts).
+RAM allows the player to amplify the effects of a script by assigning it multiple [threads](https://bitburner.readthedocs.io/en/latest/basicgameplay/scripts.html?highlight=threads#multithreading-scripts).
 
 Furthermore, `home` server would allocate all of its threads to the single attack of `silver-helix`, while the server would allocate two-thirds (100/(100+50)) of its threads to the `iron-gym` server attack and the remaining one-third (50/(100+50)) of its threads to the `neo-net` attack.
 
@@ -74,7 +74,7 @@ This is the essence of the ways the attacks are distributed; the targets themsel
 
 ### Single Target
 
-When targeting a single server, the general strategy is to grow the server "close to" its maximum possible wealth, weaken it "close to" its minimum security level, and then attempt to hack the server until the hack succeeds, thereby transfering funds from the target server to the player. This process is repeated in an endless loop.
+When targeting a single server, the general strategy is to grow the server "close to" its maximum possible wealth, weaken it "close to" its minimum security level, and then attempt to hack the server until the hack succeeds, thereby transferring funds from the target server to the player. This process is repeated in an endless loop.
 
 I've quoted "close to" because due to the diminishing returns effect, it usually isn't worth the effort to try to get the servers to their maximum levels. I've set the goal to be within 80% of the maximum amount of money a server can have and within 20% of the minimum security level. This is usually a good enough situation to justify a hack attempt (i.e. enough cash on the server worth taking, and a low enough security level to make the hack likely to be successful.)
 
@@ -82,7 +82,7 @@ I've quoted "close to" because due to the diminishing returns effect, it usually
 
 Finally, it makes sense to have no resource go unused. I've covered the resources owned by the player (`home` and purchased servers), but what about the RAM on the target servers themselves? Once they are nuked, the player can run scripts on these as well, and this extra RAM ought to be put to good use.
 
-For this, the server's resources are used in an endless loop to weaken itself. The idea here is that the weakening scripts have no downside, since they reduce security the level while always providing hacking experience. Any other script that potentially increases the security level could interfere with the security level balances achieved via the single-target scripts described above.
+For this, the server's resources are used in an endless loop to weaken itself. The idea here is that the weakening scripts have no downside, since they reduce the security level while always providing hacking experience. Any other script that potentially increases the security level could interfere with the security level balances achieved via the single-target scripts described above.
 
 ## Script Table
 
@@ -90,7 +90,7 @@ In order to run the hacking scheme, `run hack_start.js` is all that is required 
 
 | File | Description |
 | ---- | ----------- |
-| `hack_start.js` | The primary hacking script which needs to be invoked directly. It effectively acts as a load balancer, equally allocating targets across friendly servers, using the server hacking level as a weight. It attemps to distributes (`weaken`, `grow`, `hack`) workloads on `home` and any purchased friendly servers, and also distributes self-weakening attacks on target servers. |
+| `hack_start.js` | The primary hacking script which needs to be invoked directly. It effectively acts as a load balancer, equally allocating targets across friendly servers, using the server hacking level as a weight. It distributes (`grow`, `weaken`, `hack`) workloads across `home` and any purchased friendly servers, and also distributes self-weakening attacks on target servers after opening them. |
 | `hack_all.js`| This distributes the workload __within__ a server by calling `hack_one.js` on all of its targets, allocating the number of threads to be proportional to the target hacking levels. |
 | `hack_one.js` | This runs an endless grow-weaken-hack loop on the target using the strategy described above, which runs each command repeatedly until target metrics are achieved. |
 | `hack_stop.js` | This kills all hacking scripts on `home` and purchased servers. |

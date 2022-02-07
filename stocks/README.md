@@ -28,7 +28,7 @@ As mentioned earlier, the player will first need to purchase:
 - The **TIX API**, which allows the player to write commands to engage in buying and selling stock programmatically.
 - The **4S Market Data Feed**, which allows the player to request stock forecasts through an API; it also gives a visual indicator using +/- forecast signs in the UI.
 
-To watch a single stock, the probability of that stock increasing is checked every 6 seconds. If the probability if 55% or higher that it will increase, then the stock will be purchased at the maximum amount possible. If the probability that the stock will increase falls below 51%, then the stock will be sold, even at a loss. These thresholds are configurable in `stock_hold_one.js`. 
+To watch a single stock, the probability of that stock increasing is checked every 6 seconds. If the probability is 55% or higher that it will increase, then the stock will be purchased at the maximum amount possible. If the probability that the stock will increase falls below 51%, then the stock will be sold, even at a loss. These thresholds are configurable in `stock_hold_one.js`. 
 
 I found that the two thresholds are necessary because sometimes the probabilities fluctuate after purchasing, and the stock would be sold if, say, the probability temporarily decreases to 54% after purchase. Having two thresholds protects against this thrashing effect, which can cause the player to lose money on trades.
 

@@ -5,7 +5,7 @@
 
 
 ## What is Bitburner?
-Bitburner is a is free and open source hacking game where the player can write Javascript code to continually increase his or her wealth, abilities, and stature through nefarious means. The link to the game source code is [here](https://github.com/danielyxie/bitburner), and the link to the game's documentation is [here](https://bitburner.readthedocs.io/en/latest/). You can [play it through your browswer](https://danielyxie.github.io/bitburner/) (no login/registration required). Bitburner is also available [on Steam](https://store.steampowered.com/app/1812820/Bitburner/).
+Bitburner is a free and open source hacking game where the player can write Javascript code to continually increase his or her wealth, abilities, and stature through nefarious means. The link to the game source code is [here](https://github.com/danielyxie/bitburner), and the link to the game's documentation is [here](https://bitburner.readthedocs.io/en/latest/). You can [play it through your browser](https://danielyxie.github.io/bitburner/) (no login/registration required). Bitburner is also available [on Steam](https://store.steampowered.com/app/1812820/Bitburner/).
 
 The game was originally developed by [danielyxie](https://github.com/danielyxie) and is currently maintained by [hydroflame](https://github.com/hydroflame).
 
